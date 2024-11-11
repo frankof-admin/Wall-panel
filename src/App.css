@@ -1,0 +1,146 @@
+input {
+  width: 100px;
+}
+
+label {
+  margin-right: 5px;
+}
+
+.menu-wrapper,
+.menu-input-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-wrapper {
+  margin-bottom: 25px;
+  justify-content: space-around;
+}
+
+.menu-colum-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-input-wrapper {
+  justify-content: end;
+}
+
+.canvas-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.canvas {
+  position: relative;
+  display: flex;
+  min-height: 70vh;
+  width: 70%;
+  border: 2px solid black;
+}
+
+.right-size-wrapper {
+  display: flex;
+  min-height: 70vh;
+  width: 40px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.vertical-line {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  border-right: 2px solid black;
+}
+
+.horizontal-line {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  border-bottom: 2px solid black;
+}
+
+.bottom-size-wrapper {
+  display: flex;
+  margin-left: -40px;
+  width: 70%;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  height: 40px;
+}
+
+.vertical-line:before,
+.vertical-line:after,
+.horizontal-line:before,
+.horizontal-line:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid black;
+}
+
+.vertical-line:before {
+  top: -5px;
+  left: 14px;
+  transform: rotate(-90deg);
+}
+
+.vertical-line:after {
+  bottom: -5px;
+  left: 14px;
+  transform: rotate(90deg);
+}
+
+.horizontal-line:before {
+  top: 9px;
+  transform: rotate(-180deg);
+}
+
+.horizontal-line:after {
+  top: 9px;
+  right: 0;
+}
+
+.vertical-line-text {
+  position: relative;
+  top: 50%;
+  transform: rotate(-90deg);
+}
+
+.horizontal-line-text {
+  position: relative;
+  top: -5px;
+  left: 50%;
+  width: 30%;
+}
+
+.panel {
+  display: flex;
+  align-items: end;
+  height: 100%;
+  border-right: 2px solid black;
+}
+
+.panel-outlet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: -2px;
+  border: 2px solid black;
+}
+
+.panel .horizontal-line {
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.canvas .panel:last-of-type {
+  border-right: unset;
+}
