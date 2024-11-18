@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDimensions } from "./useDimensions";
 import "./App.css";
 
@@ -10,18 +10,25 @@ function App() {
   const [outletPosition, setOutletPosition] = useState({ top: 20, left: 20 });
   const [sectionCssWidth, setSectionCssWidth] = useState();
   const [realSectionWidth, setRealSectionWidth] = useState();
-  const canvasRef = useRef(null);
-  const { width: canvasCssWide, height: canvasCssHeight } =
-    useDimensions(canvasRef);
+  const multiplier = 4000;
+  const canvasWrapperRef = useRef(null);
+  const panelInputRef = useRef(null);
+  const { width: canvasWrapperCssWide } =
+    useDimensions(canvasWrapperRef);
 
-  function sectionNumberChangeHandler(e) {
-    let number = e.target.value;
+  function sectionNumberChangeHandler() {
+    let number = panelInputRef.current.value;
     setSectionNumber(number);
     if (number > 0) {
-      setSectionCssWidth(canvasCssWide / number);
-      setRealSectionWidth(panelSize.width / number);
+      setSectionCssWidth(canvasWrapperCssWide / number);
+      setRealSectionWidth((panelSize.width / number).toFixed(2));
     }
   }
+
+  useEffect(() => {
+    setSectionCssWidth(canvasWrapperCssWide / panelInputRef.current.value);
+    setRealSectionWidth((panelSize.width / panelInputRef.current.value).toFixed(2));
+  }, [panelSize, canvasWrapperCssWide, panelInputRef]);
 
   function Panel({ index }) {
     return sectionCssWidth && sectionNumber > 1 ? (
@@ -37,15 +44,32 @@ function App() {
     );
   }
 
+  function Canvas() {
+    const canvasCssSize = {
+      width: `${(panelSize.width/canvasWrapperCssWide) * multiplier}px`,
+      height: `${(panelSize.height/canvasWrapperCssWide) * multiplier}px`,
+    };
+
+    return (
+      <div className="canvas" style={{ ...canvasCssSize }}>
+        <Outlet />
+        { Array.from({ length: sectionNumber }, (_, index) => (
+            <Panel key={index} index={index} />
+        )) }
+      </div>
+    );
+  }
+
   function Outlet() {
+
     const outletCssSize = {
-      width: `${canvasCssWide * (outletSize.width / panelSize.width)}px`,
-      height: `${canvasCssHeight * (outletSize.height / panelSize.height) - 1}px`,
+      width: `${((outletSize.width/canvasWrapperCssWide) * multiplier) - 1}px`,
+      height: `${((outletSize.height/canvasWrapperCssWide) * multiplier) + 1}px`,
     };
 
     const outletCssPosition = {
-      top: `${canvasCssHeight * (outletPosition.top / panelSize.height)}px`,
-      left: `${canvasCssWide * (outletPosition.left / panelSize.width)}px`,
+      top: `${((outletPosition.top/canvasWrapperCssWide) * multiplier)}px`,
+      left: `${((outletPosition.left/canvasWrapperCssWide) * multiplier)}px`,
     };
 
     return (
@@ -54,6 +78,26 @@ function App() {
         style={{ ...outletCssSize, ...outletCssPosition }}
       ></div>
     );
+  }
+
+  function VerticalSize() {
+    return (
+      <div className="right-size-wrapper" style={{ height: `${(panelSize.height/canvasWrapperCssWide) * multiplier}px` }}>
+        <div className="vertical-line">
+          <div className="vertical-line-text">{panelSize.height}</div>
+        </div>
+      </div>
+    )
+  }
+
+  function HorizontalSize() {
+    return (
+      <div className="bottom-size-wrapper" style={{ width: `${(panelSize.width/canvasWrapperCssWide) * multiplier}px` }}>
+        <div className="horizontal-line">
+          <div className="horizontal-line-text">{panelSize.width}</div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -97,9 +141,12 @@ function App() {
             <input
               id={3}
               value={sectionNumber}
-              onChange={(e) => sectionNumberChangeHandler(e)}
+              onChange={() => sectionNumberChangeHandler()}
               name="section number"
               type="number"
+              min="1"
+              max="15"
+              ref={panelInputRef}
             />
           </div>
           <div className="menu-input-wrapper">
@@ -168,23 +215,11 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="canvas-wrapper">
-        <div className="canvas" ref={canvasRef}>
-          <Outlet />
-          {Array.from({ length: sectionNumber }, (_, index) => (
-            <Panel key={index} index={index} />
-          ))}
-        </div>
-        <div className="right-size-wrapper">
-          <div className="vertical-line">
-            <div className="vertical-line-text">{panelSize.height}</div>
-          </div>
-        </div>
-        <div className="bottom-size-wrapper">
-          <div className="horizontal-line">
-            <div className="horizontal-line-text">{panelSize.width}</div>
-          </div>
-        </div>
+      <div className="canvas-wrapper" ref={canvasWrapperRef}>
+          <Canvas />
+          <VerticalSize />
+          <div class="break"></div>
+          <HorizontalSize /> 
       </div>
     </>
   );

@@ -2,7 +2,6 @@
   "name": "wall-panel",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -24,6 +23,6 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
     "prettier": "3.3.3",
-    "vite": "^5.4.10"
+    "vite": "^5.4.11"
   }
 }
