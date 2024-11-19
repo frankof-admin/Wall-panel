@@ -19,16 +19,31 @@ function App() {
   function sectionNumberChangeHandler(value) {
     setSectionNumber(value);
     if (sectionNumber > 0) {
-      setSectionCssWidth(panelCssWide / sectionNumber);
-      setRealSectionWidth((panelSize.width / sectionNumber).toFixed(2));
+      handleSectionSizeChange();
     }
   }
 
-  useEffect(() => {
+  function handleSectionSizeChange() {
     setSectionCssWidth(panelCssWide / sectionNumber);
     setRealSectionWidth(
       (panelSize.width / sectionNumber).toFixed(2),
     );
+  }
+
+  function convertSize(sizeObject) {
+    let acc = {}
+    if (panelWrapperCssWide == 0) return;
+    for (const [key, value] of Object.entries(sizeObject)) {
+      acc = {
+        ...acc,
+        [key]: (value / panelWrapperCssWide) * multiplier,
+      }
+    }
+    return { ...acc };
+  }
+
+  useEffect(() => {
+    handleSectionSizeChange();
   }, [panelSize, panelCssWide, sectionNumber]);
 
   function Section() {
@@ -41,13 +56,10 @@ function App() {
   }
 
   function Panel() {
-    const panelCssSize = {
-      width: `${(panelSize.width / panelWrapperCssWide) * multiplier}px`,
-      height: `${(panelSize.height / panelWrapperCssWide) * multiplier}px`,
-    };
+    const size = convertSize(panelSize);
 
     return (
-      <div className="panel" style={{ ...panelCssSize }} ref={panelRef} >
+      <div className="panel" style={{ ...size }} ref={panelRef} >
         <Outlet />
         {Array.from({ length: sectionNumber }, (_, index) => (
           <Section key={index} />
@@ -57,15 +69,8 @@ function App() {
   }
 
   function Outlet() {
-    const outletCssSize = {
-      width: `${(outletSize.width / panelWrapperCssWide) * multiplier}px`,
-      height: `${(outletSize.height / panelWrapperCssWide) * multiplier}px`,
-    };
-
-    const outletCssPosition = {
-      top: `${(outletPosition.top / panelWrapperCssWide) * multiplier}px`,
-      left: `${(outletPosition.left / panelWrapperCssWide) * multiplier}px`,
-    };
+    const outletCssSize = convertSize(outletSize);
+    const outletCssPosition = convertSize(outletPosition);
 
     return (
       <div
@@ -76,12 +81,12 @@ function App() {
   }
 
   function VerticalSize() {
+    const size = convertSize(panelSize);
+
     return (
       <div
         className="right-size-wrapper"
-        style={{
-          height: `${(panelSize.height / panelWrapperCssWide) * multiplier}px`,
-        }}
+        style={{ height: size?.height }}
       >
         <div className="vertical-line">
           <div className="vertical-line-text">{panelSize.height}</div>
@@ -91,6 +96,7 @@ function App() {
   }
 
   function HorizontalSize() {
+    const size = convertSize(panelSize);
     const hasInnerLine = (sectionCssWidth && sectionNumber > 1) ? 'has-inner-line' : '';
     const classes = `bottom-size-wrapper ${hasInnerLine}`;
     return (
@@ -98,11 +104,11 @@ function App() {
       <div
         className={classes}
         style={{
-          width: `${(panelSize.width / panelWrapperCssWide) * multiplier}px`,
+          width: size?.width,
         }}
       >
         { (hasInnerLine) &&
-        <div className="horizontal-line-inner" style={{ width: sectionCssWidth}}>
+        <div className="horizontal-line-inner" style={{ width: sectionCssWidth }}>
           <div className="horizontal-line-text">{realSectionWidth}</div>
         </div> }
         <div className="horizontal-line">
