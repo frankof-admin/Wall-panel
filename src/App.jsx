@@ -32,11 +32,10 @@ function App() {
 
   function convertSize(sizeObject) {
     let acc = {}
-    if (panelWrapperCssWide == 0) return;
     for (const [key, value] of Object.entries(sizeObject)) {
       acc = {
         ...acc,
-        [key]: (value / panelWrapperCssWide) * multiplier,
+        [key]: (value / panelWrapperCssWide) * multiplier || 0,
       }
     }
     return { ...acc };
