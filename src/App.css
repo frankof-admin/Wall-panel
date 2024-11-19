@@ -1,5 +1,9 @@
+:root {
+  --black-border: 2px solid black;
+}
+
 input {
-  width: 100px;
+  width: 65px;
 }
 
 label {
@@ -13,108 +17,140 @@ label {
 }
 
 .menu-wrapper {
-  margin-bottom: 25px;
-  justify-content: space-around;
+  margin: 25px;
+  justify-content: left;
 }
 
-.menu-colum-wrapper {
+.menu-column-wrapper {
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 }
 
 .menu-input-wrapper {
   justify-content: end;
+  margin-bottom: 5px;
 }
 
-.canvas-wrapper {
+.panel-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* min-height: 100vh; */
   width: 100%;
 }
 
-.canvas {
+.panel {
   position: relative;
   display: flex;
-  border: 2px solid black;
+  border: var(--black-border);
 }
 
 .right-size-wrapper {
   display: flex;
   width: 40px;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  border-top: var(--black-border);
+  border-bottom: var(--black-border);
+}
+
+.vertical-line,
+.horizontal-line {
+  position: relative;
 }
 
 .vertical-line {
-  position: relative;
-  width: 49%;
+  width: 50%;
   height: 100%;
-  border-right: 2px solid black;
+  border-right: var(--black-border);
 }
 
 .horizontal-line {
-  position: relative;
   width: 100%;
-  height: 49%;
-  border-bottom: 2px solid black;
+  height: 50%;
+  border-bottom: var(--black-border);
+}
+
+.has-inner-line .horizontal-line {
+  height: 100%;
+}
+
+
+.horizontal-line-inner {
+  position: relative;
+  height: 40px;
+  border-right: var(--black-border);
+  border-bottom: var(--black-border);
+  margin-left: -1px;
 }
 
 .bottom-size-wrapper {
   display: flex;
+  flex-direction: column;
   margin-left: -40px;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  border-left: var(--black-border);
+  border-right: var(--black-border);
   height: 40px;
+}
+
+.bottom-size-wrapper.has-inner-line {
+  height: 60px;
 }
 
 .vertical-line:before,
 .vertical-line:after,
 .horizontal-line:before,
-.horizontal-line:after {
+.horizontal-line:after,
+.horizontal-line-inner:before,
+.horizontal-line-inner:after{
   position: absolute;
   content: "";
   width: 0;
   height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid black;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid black;
 }
 
 .vertical-line:before {
-  top: -5px;
-  left: 14px;
-  transform: rotate(-90deg);
+  top: 0;
+  left: 100%;
+  transform: translate(-50%, -25%) rotate(-90deg);
 }
 
 .vertical-line:after {
-  bottom: -5px;
-  left: 14px;
-  transform: rotate(90deg);
+  bottom: 0;
+  left: 100%;
+  transform: translate(-50%, 25%) rotate(90deg);
 }
 
-.horizontal-line:before {
-  top: 9px;
-  transform: rotate(-180deg);
+.horizontal-line:before,
+.horizontal-line-inner:before {
+  top: 100%;
+  transform: translate(0, -50%) rotate(-180deg);
 }
 
-.horizontal-line:after {
-  top: 9px;
+.horizontal-line:after,
+.horizontal-line-inner:after {
+  top: 100%;
   right: 0;
+  transform: translate(0, -50%);
+}
+
+.horizontal-line-text {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -100%);
 }
 
 .vertical-line-text {
   position: absolute;
   top: 50%;
-  transform: rotate(-90deg);
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.horizontal-line-text {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 30%;
+.vertical-line-text {
+  transform: translate(-50%, -50%) rotate(-90deg);
 }
 
 .break {
@@ -122,19 +158,19 @@ label {
   height: 0;
 }
 
-.panel {
+.section {
   display: flex;
   align-items: end;
   height: 100%;
-  border-right: 2px solid black;
+  border-right: var(--black-border);
 }
 
 .panel-outlet {
   position: absolute;
   top: 0;
   left: 0;
-  margin: -2px -2px -2px -1px;
-  border: 2px solid black;
+  margin: -1px -2px -2px -1px;
+  border: var(--black-border);
 }
 
 .panel .horizontal-line {
@@ -142,6 +178,6 @@ label {
   margin-bottom: 20px;
 }
 
-.canvas .panel:last-of-type {
+.panel .section:last-of-type {
   border-right: unset;
 }
