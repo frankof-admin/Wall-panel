@@ -1,11 +1,11 @@
+import React from "react";
+import { useAtom } from 'jotai'
+import { outletSizeAtom, outletPositionAtom } from './../atoms'
 import ControlPanelInput from "./ControlPanelInput";
 
-export default function OutletControlPanel({
-  outletSize,
-  outletPosition,
-  onSizeChange,
-  onPositionChange,
-}) {
+export default function OutletControlPanel() {
+  const [outletSize, setOutletSize] = useAtom(outletSizeAtom);
+  const [outletPosition, setOutletPosition] = useAtom(outletPositionAtom);
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput
@@ -14,7 +14,7 @@ export default function OutletControlPanel({
         dimension={outletSize}
         dimensionKey={"width"}
         name={"outlet width"}
-        setFunc={onSizeChange}
+        setFunc={setOutletSize}
       />
       <ControlPanelInput
         id={5}
@@ -22,7 +22,7 @@ export default function OutletControlPanel({
         dimension={outletSize}
         dimensionKey={"height"}
         name={"outlet height"}
-        setFunc={onSizeChange}
+        setFunc={setOutletSize}
       />
       <ControlPanelInput
         id={6}
@@ -30,7 +30,7 @@ export default function OutletControlPanel({
         dimension={outletPosition}
         dimensionKey={"left"}
         name={"outlet position x"}
-        setFunc={onPositionChange}
+        setFunc={setOutletPosition}
       />
       <ControlPanelInput
         id={6}
@@ -38,7 +38,7 @@ export default function OutletControlPanel({
         dimension={outletPosition}
         dimensionKey={"top"}
         name={"outlet position y"}
-        setFunc={onPositionChange}
+        setFunc={setOutletPosition}
       />
     </div>
   );

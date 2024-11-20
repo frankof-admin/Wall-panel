@@ -1,5 +1,10 @@
 import React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useAtom } from 'jotai'
+import { panelSizeAtom, panelCssSizeAtom, panelWrapperCssWideAtom, sectionNumberAtom,
+  sectionCssWidthAtom,
+  realSectionWidthAtom
+ } from './atoms'
+import { useRef, useEffect } from "react";
 import PanelControlPanel from "./components/PanelControlPanel";
 import OutletControlPanel from "./components/OutletControlPanel";
 import Panel from "./components/Panel";
@@ -10,15 +15,14 @@ import { convertSize } from "./utils";
 import "./App.css";
 
 function App() {
-  const [panelSize, setPanelSize] = useState({ width: 300, height: 200 });
-  const [panelCssSize, setPanelCssSize] = useState(null);
-  const [sectionNumber, setSectionNumber] = useState({ number: 1 });
-  const [outletSize, setOutletSize] = useState({ width: 20, height: 20 });
-  const [outletPosition, setOutletPosition] = useState({ top: 20, left: 20 });
-  const [sectionCssWidth, setSectionCssWidth] = useState();
-  const [realSectionWidth, setRealSectionWidth] = useState();
+  const [panelSize, setPanelSize] = useAtom(panelSizeAtom);
+  const [panelCssSize, setPanelCssSize] = useAtom(panelCssSizeAtom);
+  const [panelWrapperCssWide, setPanelWrapperCssWide] = useAtom(panelWrapperCssWideAtom);
+  const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
+  const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
+  const [realSectionWidth, setRealSectionWidth] = useAtom(realSectionWidthAtom);
   const panelWrapperRef = useRef(null);
-  const { width: panelWrapperCssWide } = useDimensions(panelWrapperRef);
+  const { width: panelWrapperWide } = useDimensions(panelWrapperRef);
 
   function handleSectionSizeChange() {
     setSectionCssWidth(panelCssSize?.width / sectionNumber?.number);
@@ -26,11 +30,12 @@ function App() {
   }
 
   useEffect(() => {
-    if (panelWrapperCssWide !== 0) {
-      const size = convertSize(panelSize, panelWrapperCssWide);
+    if (panelWrapperWide !== 0) {
+      setPanelWrapperCssWide(panelWrapperWide);
+      const size = convertSize(panelSize, panelWrapperWide);
       setPanelCssSize(size);
     }
-  }, [panelWrapperCssWide, panelSize]);
+  }, [panelWrapperWide, panelSize]);
 
   useEffect(() => {
     handleSectionSizeChange();
@@ -45,20 +50,13 @@ function App() {
           onSizeChange={setPanelSize}
           onNumberChange={setSectionNumber}
         />
-        <OutletControlPanel
-          outletSize={outletSize}
-          outletPosition={outletPosition}
-          onSizeChange={setOutletSize}
-          onPositionChange={setOutletPosition}
-        />
+        <OutletControlPanel />
       </div>
       <div className="panel-wrapper" ref={panelWrapperRef}>
         <Panel
           panelCssSize={panelCssSize}
           sectionCssWidth={sectionCssWidth}
           sectionNumber={sectionNumber?.number}
-          outletSize={outletSize}
-          outletPosition={outletPosition}
           panelWrapperCssWide={panelWrapperCssWide}
         />
         <VerticalSize

@@ -1,27 +1,16 @@
+import React from "react";
 import Outlet from "./Outlet";
 import Section from "./Section";
 
 export default function Panel({
   panelCssSize,
-  sectionCssWidth,
-  sectionNumber,
-  outletSize,
-  outletPosition,
-  panelWrapperCssWide,
+  sectionNumber
 }) {
   return (
     <div className="panel" style={{ ...panelCssSize }}>
-      <Outlet
-        outletSize={outletSize}
-        outletPosition={outletPosition}
-        panelWrapperCssWide={panelWrapperCssWide}
-      />
+      <Outlet />
       {Array.from({ length: sectionNumber }, (_, index) => (
-        <Section
-          key={index}
-          sectionCssWidth={sectionCssWidth}
-          sectionNumber={sectionNumber}
-        />
+        <Section key={index} />
       ))}
     </div>
   );
