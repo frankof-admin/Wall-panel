@@ -6,31 +6,30 @@ export default function PanelControlPanel({
   onSizeChange,
   onNumberChange,
 }) {
-
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput
         id={1}
-        label={'Ширина панелі (мм):'}
+        label={"Ширина панелі (мм):"}
         dimension={panelSize}
-        dimensionKey={'width'}
-        name={'panel width'}
+        dimensionKey={"width"}
+        name={"panel width"}
         setFunc={onSizeChange}
       />
       <ControlPanelInput
         id={2}
-        label={'Ширина панелі (мм):'}
+        label={"Ширина панелі (мм):"}
         dimension={panelSize}
-        dimensionKey={'height'}
-        name={'panel height'}
+        dimensionKey={"height"}
+        name={"panel height"}
         setFunc={onSizeChange}
       />
       <ControlPanelInput
         id={3}
-        label={'Кількість секцій:'}
+        label={"Кількість секцій:"}
         dimension={sectionNumber}
-        dimensionKey={'number'}
-        name={'section number'}
+        dimensionKey={"number"}
+        name={"section number"}
         setFunc={onNumberChange}
       />
     </div>

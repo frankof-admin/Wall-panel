@@ -15,7 +15,7 @@ const dimensionChangeHandler = (e, dimension, dimensionKey, setFunc) => {
   setFunc({
     ...dimension,
     [dimensionKey]: e?.target.value,
-  })
-}
+  });
+};
 
 export { convertSize, dimensionChangeHandler };
