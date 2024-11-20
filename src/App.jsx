@@ -19,16 +19,14 @@ function App() {
   const [realSectionWidth, setRealSectionWidth] = useState();
   const panelWrapperRef = useRef(null);
   const { width: panelWrapperCssWide } = useDimensions(panelWrapperRef);
-  
+
   function handleSectionSizeChange() {
     setSectionCssWidth(panelCssSize?.width / sectionNumber);
-    setRealSectionWidth(
-      (panelSize.width / sectionNumber).toFixed(2),
-    );
+    setRealSectionWidth((panelSize.width / sectionNumber).toFixed(2));
   }
 
   useEffect(() => {
-    if(panelWrapperCssWide !== 0) {
+    if (panelWrapperCssWide !== 0) {
       const size = convertSize(panelSize, panelWrapperCssWide);
       setPanelCssSize(size);
     }
@@ -63,9 +61,12 @@ function App() {
           outletPosition={outletPosition}
           panelWrapperCssWide={panelWrapperCssWide}
         />
-        <VerticalSize  panelCssHeight={panelCssSize?.height} panelHeight={panelSize?.height} />
+        <VerticalSize
+          panelCssHeight={panelCssSize?.height}
+          panelHeight={panelSize?.height}
+        />
         <div className="break"></div>
-        <HorizontalSize 
+        <HorizontalSize
           panelCssWidth={panelCssSize?.width}
           panelWidth={panelSize?.width}
           sectionWidth={realSectionWidth}

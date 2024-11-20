@@ -73,7 +73,6 @@ label {
   height: 100%;
 }
 
-
 .horizontal-line-inner {
   position: relative;
   height: 40px;
@@ -100,7 +99,7 @@ label {
 .horizontal-line:before,
 .horizontal-line:after,
 .horizontal-line-inner:before,
-.horizontal-line-inner:after{
+.horizontal-line-inner:after {
   position: absolute;
   content: "";
   width: 0;

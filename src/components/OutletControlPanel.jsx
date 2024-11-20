@@ -1,4 +1,9 @@
-export default function OutletControlPanel({outletSize, outletPosition, onSizeChange, onPositionChange}) {
+export default function OutletControlPanel({
+  outletSize,
+  outletPosition,
+  onSizeChange,
+  onPositionChange,
+}) {
   return (
     <div className="menu-column-wrapper">
       <div className="menu-input-wrapper">
@@ -6,10 +11,12 @@ export default function OutletControlPanel({outletSize, outletPosition, onSizeCh
         <input
           id={4}
           value={outletSize?.width}
-          onChange={(e) => onSizeChange({
-            ...outletSize,
-            width: e?.target.value,
-          })}
+          onChange={(e) =>
+            onSizeChange({
+              ...outletSize,
+              width: e?.target.value,
+            })
+          }
           name="outlet width"
           type="number"
         />
@@ -19,10 +26,12 @@ export default function OutletControlPanel({outletSize, outletPosition, onSizeCh
         <input
           id={5}
           value={outletSize?.height}
-          onChange={(e) => onSizeChange({
-            ...outletSize,
-            height: e?.target.value,
-          })}
+          onChange={(e) =>
+            onSizeChange({
+              ...outletSize,
+              height: e?.target.value,
+            })
+          }
           name="outlet height"
           type="number"
         />

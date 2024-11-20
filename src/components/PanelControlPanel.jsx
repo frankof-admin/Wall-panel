@@ -1,4 +1,9 @@
-export default function PanelControlPanel({ panelSize, sectionNumber, onSizeChange, onNumberChange }) {
+export default function PanelControlPanel({
+  panelSize,
+  sectionNumber,
+  onSizeChange,
+  onNumberChange,
+}) {
   return (
     <div className="menu-column-wrapper">
       <div className="menu-input-wrapper">
