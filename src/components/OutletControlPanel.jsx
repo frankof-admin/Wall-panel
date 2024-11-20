@@ -6,13 +6,6 @@ export default function OutletControlPanel({
   onSizeChange,
   onPositionChange,
 }) {
-  const positionChangeHandler = (e, dimension, dimensionKey) => {
-    onPositionChange({
-      ...dimension,
-      [dimensionKey]: e?.target.value,
-    });
-  };
-
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput

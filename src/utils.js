@@ -14,7 +14,7 @@ function convertSize(sizeObject, panelWrapperCssWide) {
 const dimensionChangeHandler = (e, dimension, dimensionKey, setFunc) => {
   setFunc({
     ...dimension,
-    [dimensionKey]: e?.target.value,
+    [dimensionKey]: e?.target.valueAsNumber,
   });
 };
 
