@@ -12,7 +12,7 @@ import "./App.css";
 function App() {
   const [panelSize, setPanelSize] = useState({ width: 300, height: 200 });
   const [panelCssSize, setPanelCssSize] = useState(null);
-  const [sectionNumber, setSectionNumber] = useState(1);
+  const [sectionNumber, setSectionNumber] = useState({ number: 1 });
   const [outletSize, setOutletSize] = useState({ width: 20, height: 20 });
   const [outletPosition, setOutletPosition] = useState({ top: 20, left: 20 });
   const [sectionCssWidth, setSectionCssWidth] = useState();
@@ -21,8 +21,8 @@ function App() {
   const { width: panelWrapperCssWide } = useDimensions(panelWrapperRef);
 
   function handleSectionSizeChange() {
-    setSectionCssWidth(panelCssSize?.width / sectionNumber);
-    setRealSectionWidth((panelSize.width / sectionNumber).toFixed(2));
+    setSectionCssWidth(panelCssSize?.width / sectionNumber?.number);
+    setRealSectionWidth((panelSize?.width / sectionNumber?.number).toFixed(2));
   }
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function App() {
         <Panel
           panelCssSize={panelCssSize}
           sectionCssWidth={sectionCssWidth}
-          sectionNumber={sectionNumber}
+          sectionNumber={sectionNumber?.number}
           outletSize={outletSize}
           outletPosition={outletPosition}
           panelWrapperCssWide={panelWrapperCssWide}
@@ -71,7 +71,7 @@ function App() {
           panelWidth={panelSize?.width}
           sectionWidth={realSectionWidth}
           sectionCssWidth={sectionCssWidth}
-          sectionNumber={sectionNumber}
+          sectionNumber={sectionNumber?.number}
         />
       </div>
     </>

@@ -1,71 +1,53 @@
+import ControlPanelInput from "./ControlPanelInput";
+
 export default function OutletControlPanel({
   outletSize,
   outletPosition,
   onSizeChange,
   onPositionChange,
 }) {
+
+  const positionChangeHandler = (e, dimension, dimensionKey) => {
+    onPositionChange({
+      ...dimension,
+      [dimensionKey]: e?.target.value,
+    })
+  }
+
   return (
     <div className="menu-column-wrapper">
-      <div className="menu-input-wrapper">
-        <label htmlFor={4}>Ширина вирізу (мм):</label>
-        <input
-          id={4}
-          value={outletSize?.width}
-          onChange={(e) =>
-            onSizeChange({
-              ...outletSize,
-              width: e?.target.value,
-            })
-          }
-          name="outlet width"
-          type="number"
-        />
-      </div>
-      <div className="menu-input-wrapper">
-        <label htmlFor={5}>Висота вирізу (мм):</label>
-        <input
-          id={5}
-          value={outletSize?.height}
-          onChange={(e) =>
-            onSizeChange({
-              ...outletSize,
-              height: e?.target.value,
-            })
-          }
-          name="outlet height"
-          type="number"
-        />
-      </div>
-      <div className="menu-input-wrapper">
-        <label htmlFor={6}>Відступ по горизонталі (мм):</label>
-        <input
-          id={6}
-          value={outletPosition?.left}
-          onChange={(e) =>
-            onPositionChange({
-              ...outletPosition,
-              left: e.target.value,
-            })
-          }
-          name="outlet position x"
-          type="number"
-        />
-      </div>
-      <div className="menu-input-wrapper">
-        <label htmlFor={7}>Відступ по вертикалі (мм):</label>
-        <input
-          id={7}
-          value={outletPosition?.top}
-          onChange={(e) =>
-            onPositionChange({
-              ...outletPosition,
-              top: e.target.value,
-            })
-          }
-          name="outlet position y"
-          type="number"
-        />
-      </div>
+      <ControlPanelInput
+        id={4}
+        label={'Ширина вирізу (мм):'}
+        dimension={outletSize}
+        dimensionKey={'width'}
+        name={'outlet width'}
+        setFunc={onSizeChange}
+      />
+      <ControlPanelInput
+        id={5}
+        label={'Висота вирізу (мм):'}
+        dimension={outletSize}
+        dimensionKey={'height'}
+        name={'outlet height'}
+        setFunc={onSizeChange}
+      />
+      <ControlPanelInput
+        id={6}
+        label={'Відступ по горизонталі (мм):'}
+        dimension={outletPosition}
+        dimensionKey={'left'}
+        name={'outlet position x'}
+        setFunc={onPositionChange}
+      />
+      <ControlPanelInput
+        id={6}
+        label={'Відступ по вертикалі (мм):'}
+        dimension={outletPosition}
+        dimensionKey={'top'}
+        name={'outlet position y'}
+        setFunc={onPositionChange}
+      />
     </div>
   );
 }

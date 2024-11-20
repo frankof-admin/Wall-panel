@@ -11,4 +11,11 @@ function convertSize(sizeObject, panelWrapperCssWide) {
   return { ...acc };
 }
 
-export { convertSize };
+const dimensionChangeHandler = (e, dimension, dimensionKey, setFunc) => {
+  setFunc({
+    ...dimension,
+    [dimensionKey]: e?.target.value,
+  })
+}
+
+export { convertSize, dimensionChangeHandler };
