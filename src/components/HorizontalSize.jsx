@@ -1,12 +1,16 @@
-export default function HorizontalSize({
-  panelCssWidth,
-  panelWidth,
-  sectionWidth,
-  sectionCssWidth,
-  sectionNumber,
-}) {
+import React from "react";
+import { useAtomValue } from 'jotai'
+import { panelSizeAtom, panelCssSizeAtom, sectionCssWidthAtom, sectionRealWidthAtom, sectionNumberAtom } from './../atoms'
+
+export default function HorizontalSize() {
+  const { width: panelRealWidth } = useAtomValue(panelSizeAtom);
+  const { width: panelCssWidth } = useAtomValue(panelCssSizeAtom);
+  const sectionCssWidth = useAtomValue(sectionCssWidthAtom);
+  const sectionRealWidth = useAtomValue(sectionRealWidthAtom);
+  const { number } = useAtomValue(sectionNumberAtom);
+
   const hasInnerLine =
-    sectionCssWidth && sectionNumber > 1 ? "has-inner-line" : "";
+    sectionCssWidth && number > 1 ? "has-inner-line" : "";
   const classes = `bottom-size-wrapper ${hasInnerLine}`;
 
   return (
@@ -22,11 +26,11 @@ export default function HorizontalSize({
             className="horizontal-line-inner"
             style={{ width: sectionCssWidth }}
           >
-            <div className="horizontal-line-text">{sectionWidth}</div>
+            <div className="horizontal-line-text">{sectionRealWidth}</div>
           </div>
         )}
         <div className="horizontal-line">
-          <div className="horizontal-line-text">{panelWidth}</div>
+          <div className="horizontal-line-text">{panelRealWidth}</div>
         </div>
       </div>
     </>

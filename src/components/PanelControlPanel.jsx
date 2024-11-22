@@ -1,3 +1,4 @@
+import React from "react";
 import ControlPanelInput from "./ControlPanelInput";
 
 export default function PanelControlPanel({

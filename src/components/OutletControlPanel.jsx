@@ -6,6 +6,7 @@ import ControlPanelInput from "./ControlPanelInput";
 export default function OutletControlPanel() {
   const [outletSize, setOutletSize] = useAtom(outletSizeAtom);
   const [outletPosition, setOutletPosition] = useAtom(outletPositionAtom);
+
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput

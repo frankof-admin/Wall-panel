@@ -2,7 +2,7 @@ import React from "react";
 import { useAtom } from 'jotai'
 import { panelSizeAtom, panelCssSizeAtom, panelWrapperCssWideAtom, sectionNumberAtom,
   sectionCssWidthAtom,
-  realSectionWidthAtom
+  sectionRealWidthAtom
  } from './atoms'
 import { useRef, useEffect } from "react";
 import PanelControlPanel from "./components/PanelControlPanel";
@@ -20,7 +20,7 @@ function App() {
   const [panelWrapperCssWide, setPanelWrapperCssWide] = useAtom(panelWrapperCssWideAtom);
   const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
-  const [realSectionWidth, setRealSectionWidth] = useAtom(realSectionWidthAtom);
+  const [realSectionWidth, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
   const panelWrapperRef = useRef(null);
   const { width: panelWrapperWide } = useDimensions(panelWrapperRef);
 
