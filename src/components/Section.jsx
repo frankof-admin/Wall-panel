@@ -1,6 +1,6 @@
 import React from "react";
-import { useAtomValue } from 'jotai'
-import { sectionCssWidthAtom, sectionNumberAtom } from './../atoms';
+import { useAtomValue } from "jotai";
+import { sectionCssWidthAtom, sectionNumberAtom } from "./../atoms";
 
 export default function Section() {
   const sectionCssWidth = useAtomValue(sectionCssWidthAtom);

@@ -1,12 +1,15 @@
 import React from "react";
+import { useAtom } from "jotai";
+import {
+  panelSizeAtom,
+  sectionNumberAtom,
+} from "./../atoms";
 import ControlPanelInput from "./ControlPanelInput";
 
-export default function PanelControlPanel({
-  panelSize,
-  sectionNumber,
-  onSizeChange,
-  onNumberChange,
-}) {
+export default function PanelControlPanel() {
+  const [panelSize, setPanelSize] = useAtom(panelSizeAtom);
+  const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
+
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput
@@ -15,7 +18,7 @@ export default function PanelControlPanel({
         dimension={panelSize}
         dimensionKey={"width"}
         name={"panel width"}
-        setFunc={onSizeChange}
+        setFunc={setPanelSize}
       />
       <ControlPanelInput
         id={2}
@@ -23,7 +26,7 @@ export default function PanelControlPanel({
         dimension={panelSize}
         dimensionKey={"height"}
         name={"panel height"}
-        setFunc={onSizeChange}
+        setFunc={setPanelSize}
       />
       <ControlPanelInput
         id={3}
@@ -31,7 +34,7 @@ export default function PanelControlPanel({
         dimension={sectionNumber}
         dimensionKey={"number"}
         name={"section number"}
-        setFunc={onNumberChange}
+        setFunc={setSectionNumber}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
-import { useAtom } from 'jotai'
-import { outletSizeAtom, outletPositionAtom } from './../atoms'
+import { useAtom } from "jotai";
+import { outletSizeAtom, outletPositionAtom } from "./../atoms";
 import ControlPanelInput from "./ControlPanelInput";
 
 export default function OutletControlPanel() {

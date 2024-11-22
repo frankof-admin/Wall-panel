@@ -1,8 +1,8 @@
 import React from "react";
-import { useAtomValue } from 'jotai'
-import { panelCssSizeAtom, panelSizeAtom } from './../atoms'
+import { useAtomValue } from "jotai";
+import { panelCssSizeAtom, panelSizeAtom } from "./../atoms";
 export default function VerticalSize() {
-  const { height: heightCss  } = useAtomValue(panelCssSizeAtom);
+  const { height: heightCss } = useAtomValue(panelCssSizeAtom);
   const { height: panelHeight } = useAtomValue(panelSizeAtom);
 
   return (

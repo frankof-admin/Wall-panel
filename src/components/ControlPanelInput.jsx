@@ -9,7 +9,6 @@ export default function ControlPanelInput({
   dimensionKey,
   setFunc,
 }) {
-
   return (
     <div className="menu-input-wrapper">
       <label htmlFor={id}>{label}</label>

@@ -1,9 +1,13 @@
 import React from "react";
-import { useAtom } from 'jotai'
-import { panelSizeAtom, panelCssSizeAtom, panelWrapperCssWideAtom, sectionNumberAtom,
+import { useAtom } from "jotai";
+import {
+  panelSizeAtom,
+  panelCssSizeAtom,
+  panelWrapperCssWideAtom,
+  sectionNumberAtom,
   sectionCssWidthAtom,
-  sectionRealWidthAtom
- } from './atoms'
+  sectionRealWidthAtom,
+} from "./atoms";
 import { useRef, useEffect } from "react";
 import PanelControlPanel from "./components/PanelControlPanel";
 import OutletControlPanel from "./components/OutletControlPanel";
@@ -17,7 +21,9 @@ import "./App.css";
 function App() {
   const [panelSize, setPanelSize] = useAtom(panelSizeAtom);
   const [panelCssSize, setPanelCssSize] = useAtom(panelCssSizeAtom);
-  const [panelWrapperCssWide, setPanelWrapperCssWide] = useAtom(panelWrapperCssWideAtom);
+  const [panelWrapperCssWide, setPanelWrapperCssWide] = useAtom(
+    panelWrapperCssWideAtom,
+  );
   const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
   const [realSectionWidth, setRealSectionWidth] = useAtom(sectionRealWidthAtom);

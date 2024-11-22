@@ -1,6 +1,10 @@
 import React from "react";
-import { useAtomValue } from 'jotai'
-import { outletSizeAtom, outletPositionAtom, panelWrapperCssWideAtom } from './../atoms'
+import { useAtomValue } from "jotai";
+import {
+  outletSizeAtom,
+  outletPositionAtom,
+  panelWrapperCssWideAtom,
+} from "./../atoms";
 import { convertSize } from "./../utils";
 
 export default function Outlet() {
