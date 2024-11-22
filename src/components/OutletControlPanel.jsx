@@ -10,7 +10,7 @@ export default function OutletControlPanel() {
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput
-        id={4}
+        id={"outletWidth"}
         label={"Ширина вирізу (мм):"}
         dimension={outletSize}
         dimensionKey={"width"}
@@ -18,7 +18,7 @@ export default function OutletControlPanel() {
         setFunc={setOutletSize}
       />
       <ControlPanelInput
-        id={5}
+        id={"outletHeight"}
         label={"Висота вирізу (мм):"}
         dimension={outletSize}
         dimensionKey={"height"}
@@ -26,7 +26,7 @@ export default function OutletControlPanel() {
         setFunc={setOutletSize}
       />
       <ControlPanelInput
-        id={6}
+        id={"outletPositionX"}
         label={"Відступ по горизонталі (мм):"}
         dimension={outletPosition}
         dimensionKey={"left"}
@@ -34,7 +34,7 @@ export default function OutletControlPanel() {
         setFunc={setOutletPosition}
       />
       <ControlPanelInput
-        id={6}
+        id={"outletPositionY"}
         label={"Відступ по вертикалі (мм):"}
         dimension={outletPosition}
         dimensionKey={"top"}

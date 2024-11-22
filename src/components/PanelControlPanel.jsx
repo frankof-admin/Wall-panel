@@ -1,9 +1,6 @@
 import React from "react";
 import { useAtom } from "jotai";
-import {
-  panelSizeAtom,
-  sectionNumberAtom,
-} from "./../atoms";
+import { panelSizeAtom, sectionNumberAtom } from "./../atoms";
 import ControlPanelInput from "./ControlPanelInput";
 
 export default function PanelControlPanel() {
@@ -13,7 +10,7 @@ export default function PanelControlPanel() {
   return (
     <div className="menu-column-wrapper">
       <ControlPanelInput
-        id={1}
+        id={"panelWidth"}
         label={"Ширина панелі (мм):"}
         dimension={panelSize}
         dimensionKey={"width"}
@@ -21,7 +18,7 @@ export default function PanelControlPanel() {
         setFunc={setPanelSize}
       />
       <ControlPanelInput
-        id={2}
+        id={"panelHeight"}
         label={"Ширина панелі (мм):"}
         dimension={panelSize}
         dimensionKey={"height"}
@@ -29,7 +26,7 @@ export default function PanelControlPanel() {
         setFunc={setPanelSize}
       />
       <ControlPanelInput
-        id={3}
+        id={"sectionNumber"}
         label={"Кількість секцій:"}
         dimension={sectionNumber}
         dimensionKey={"number"}
