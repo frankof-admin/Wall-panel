@@ -28,7 +28,7 @@ function App() {
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
   const [realSectionWidth, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
   const canvasRef = useRef(null);
-  const { width: canvasWide } = useDimensions(canvasRef);
+  const { width: canvasCssWide } = useDimensions(canvasRef);
 
   function handleSectionSizeChange() {
     setSectionCssWidth(panelCssSize?.width / sectionNumber?.number);
@@ -36,12 +36,12 @@ function App() {
   }
 
   useEffect(() => {
-    if (canvasWide !== 0) {
-      setPanelWrapperCssWide(canvasWide);
-      const size = convertSize(panelSize, canvasWide);
+    if (canvasCssWide !== 0) {
+      setPanelWrapperCssWide(canvasCssWide);
+      const size = convertSize(panelSize, canvasCssWide);
       setPanelCssSize(size);
     }
-  }, [canvasWide, panelSize]);
+  }, [canvasCssWide, panelSize]);
 
   useEffect(() => {
     handleSectionSizeChange();
