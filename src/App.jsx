@@ -27,8 +27,8 @@ function App() {
   const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
   const [realSectionWidth, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
-  const panelWrapperRef = useRef(null);
-  const { width: panelWrapperWide } = useDimensions(panelWrapperRef);
+  const canvasRef = useRef(null);
+  const { width: canvasWide } = useDimensions(canvasRef);
 
   function handleSectionSizeChange() {
     setSectionCssWidth(panelCssSize?.width / sectionNumber?.number);
@@ -36,12 +36,12 @@ function App() {
   }
 
   useEffect(() => {
-    if (panelWrapperWide !== 0) {
-      setPanelWrapperCssWide(panelWrapperWide);
-      const size = convertSize(panelSize, panelWrapperWide);
+    if (canvasWide !== 0) {
+      setPanelWrapperCssWide(canvasWide);
+      const size = convertSize(panelSize, canvasWide);
       setPanelCssSize(size);
     }
-  }, [panelWrapperWide, panelSize]);
+  }, [canvasWide, panelSize]);
 
   useEffect(() => {
     handleSectionSizeChange();
@@ -58,17 +58,19 @@ function App() {
         />
         <OutletControlPanel />
       </div>
-      <div className="panel-wrapper" ref={panelWrapperRef}>
-        <Panel
-          panelCssSize={panelCssSize}
-          sectionCssWidth={sectionCssWidth}
-          sectionNumber={sectionNumber?.number}
-          panelWrapperCssWide={panelWrapperCssWide}
-        />
-        <VerticalSize
-          panelCssHeight={panelCssSize?.height}
-          panelHeight={panelSize?.height}
-        />
+      <div className="canvas" ref={canvasRef}>
+        <div className="panel-wrapper">
+          <Panel
+            panelCssSize={panelCssSize}
+            sectionCssWidth={sectionCssWidth}
+            sectionNumber={sectionNumber?.number}
+            panelWrapperCssWide={panelWrapperCssWide}
+          />
+          <VerticalSize
+            panelCssHeight={panelCssSize?.height}
+            panelHeight={panelSize?.height}
+          />
+        </div>
         <div className="break"></div>
         <HorizontalSize
           panelCssWidth={panelCssSize?.width}

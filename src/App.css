@@ -2,8 +2,12 @@
   --black-border: 2px solid black;
 }
 
-input {
+.menu-input-wrapper input {
   width: 65px;
+  border: 1px solid black !important;
+  outline: unset !important;
+  padding: unset !important;
+  padding-left: 2px !important;
 }
 
 label {
@@ -17,7 +21,7 @@ label {
 }
 
 .menu-wrapper {
-  margin: 25px;
+  margin: 0 25px 25px 25px;
   justify-content: left;
 }
 
@@ -32,11 +36,16 @@ label {
   margin-bottom: 5px;
 }
 
-.panel-wrapper {
+.canvas {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+}
+
+.panel-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .panel {

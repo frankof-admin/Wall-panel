@@ -1,11 +1,11 @@
-function convertSize(sizeObject, panelWrapperWide) {
-  const multiplier = 4000;
+function convertSize(sizeObject, canvasWide) {
+  const multiplier = 3000;
   let acc = {};
-  if (!panelWrapperWide) return null;
+  if (!canvasWide) return null;
   for (const [key, value] of Object.entries(sizeObject)) {
     acc = {
       ...acc,
-      [key]: (value / panelWrapperWide) * multiplier,
+      [key]: (value / canvasWide) * multiplier,
     };
   }
   return { ...acc };
