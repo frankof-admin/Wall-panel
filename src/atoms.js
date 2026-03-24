@@ -8,3 +8,4 @@ export const outletPositionAtom = atom({ left: 200, top: 200 });
 export const sectionCssWidthAtom = atom(0);
 export const sectionRealWidthAtom = atom(0);
 export const panelWrapperCssWideAtom = atom(0);
+export const scaleAtom = atom(1);

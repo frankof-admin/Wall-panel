@@ -7,6 +7,7 @@ import {
   sectionNumberAtom,
   sectionCssWidthAtom,
   sectionRealWidthAtom,
+  scaleAtom,
 } from "./atoms";
 import PanelControlPanel from "./components/PanelControlPanel";
 import OutletControlPanel from "./components/OutletControlPanel";
@@ -24,12 +25,13 @@ function App() {
   const [, setPanelWrapperCssWide] = useAtom(panelWrapperCssWideAtom);
   const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
-  const [realSectionWidth, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
+  const [, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
 
   const canvasRef = useRef(null);
   const { width, height } = useDimensions(canvasRef);
 
   const scale = useScale(panelSize, { width, height });
+  const [, setScale] = useAtom(scaleAtom);
 
   useEffect(() => {
     if (!width || !height) return;
@@ -38,6 +40,7 @@ function App() {
 
     const size = convertSize(panelSize, scale);
     setPanelCssSize(size);
+    setScale(scale);
   }, [width, height, panelSize, scale, setPanelCssSize, setPanelWrapperCssWide]);
 
   useEffect(() => {
