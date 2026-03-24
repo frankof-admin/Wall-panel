@@ -91,9 +91,10 @@ label {
 }
 
 .bottom-size-wrapper {
+  position: absolute;
+  bottom: -40px;
   display: flex;
   flex-direction: column;
-  margin-left: -40px;
   border-left: var(--black-border);
   border-right: var(--black-border);
   height: 40px;
@@ -188,4 +189,27 @@ label {
 
 .panel .section:last-of-type {
   border-right: unset;
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 180px);
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel-wrapper {
+  position: relative;
+  /* display: inline-block; */
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.panel {
+  position: relative;
+  box-sizing: border-box;
 }
