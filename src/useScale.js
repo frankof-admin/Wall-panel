@@ -7,11 +7,14 @@ export function useScale(panelSize, canvasSize) {
     if (!panelSize?.width || !panelSize?.height) return 1;
     if (!canvasSize?.width || !canvasSize?.height) return 1;
 
+    const reservedWidth = 80;
+    const reservedHeight = 140;
+
     const rawWidth = panelSize.width * BASE_SCALE;
     const rawHeight = panelSize.height * BASE_SCALE;
 
-    const availableWidth = canvasSize.width - 80;
-    const availableHeight = canvasSize.height - 100;
+    const availableWidth = canvasSize.width - reservedWidth;
+    const availableHeight = canvasSize.height - reservedHeight;
 
     const scaleX = availableWidth / rawWidth;
     const scaleY = availableHeight / rawHeight;

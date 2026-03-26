@@ -54,11 +54,23 @@ label {
   border: var(--black-border);
 }
 
-.right-size-wrapper {
+.vertical-size-wrapper {
   display: flex;
   width: 40px;
-  border-top: var(--black-border);
-  border-bottom: var(--black-border);
+  /* border-top: var(--black-border);
+  border-bottom: var(--black-border); */
+  position: absolute;
+  top: 0;
+  right: -40px;
+}
+
+.vertical-dimension-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: #111;
 }
 
 .vertical-line,
@@ -87,17 +99,17 @@ label {
   height: 40px;
   border-right: var(--black-border);
   border-bottom: var(--black-border);
-  margin-left: -1px;
+  /* margin-left: -1px; */
 }
 
 .bottom-size-wrapper {
   position: absolute;
-  bottom: -40px;
   display: flex;
   flex-direction: column;
-  border-left: var(--black-border);
-  border-right: var(--black-border);
+  /* border-left: var(--black-border);
+  border-right: var(--black-border); */
   height: 40px;
+  margin: 0;
 }
 
 .bottom-size-wrapper.has-inner-line {
@@ -178,7 +190,7 @@ label {
   position: absolute;
   top: 0;
   left: 0;
-  margin: -1px -2px -2px -1px;
+  /* margin: -1px -2px -2px -1px; */
   border: var(--black-border);
 }
 
@@ -204,7 +216,7 @@ label {
 
 .panel-wrapper {
   position: relative;
-  /* display: inline-block; */
+  display: inline-block;
   max-width: 100%;
   max-height: 100%;
 }
@@ -212,4 +224,117 @@ label {
 .panel {
   position: relative;
   box-sizing: border-box;
+}
+
+.bottom-size-wrapper {
+  position: absolute;
+  pointer-events: none;
+}
+
+.dimension-line {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  background: #111;
+}
+
+.dimension-line-inner {
+  top: 20px;
+}
+
+.dimension-line-outer {
+  top: 20px;
+}
+
+.dimension-line-outer.inner-dimension-present {
+  top: 40px;
+}
+
+.dimension-tick {
+  position: absolute;
+  top: -20px;
+  width: 1px;
+  height: 40px;
+  background: #111;
+}
+
+.inner-dimension-present .dimension-tick {
+  top: -40px;
+  height: 60px;
+}
+
+.dimension-line-inner .dimension-tick {
+  height: 25px;
+}
+
+.dimension-tick.top,
+.dimension-tick.bottom {
+  transform: rotate(90deg);
+}
+
+.dimension-tick.top {
+  top: -19px;
+}
+
+.dimension-tick.bottom {
+  top: calc(100% - 20px);
+}
+
+.dimension-tick.left {
+  left: 0;
+}
+
+.dimension-tick.right {
+  right: -1px;
+}
+
+.dimension-arrow {
+  position: absolute;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid #111;
+  border-right: 1px solid #111;
+  background: transparent;
+}
+
+.dimension-arrow.top {
+  top: 3px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.dimension-arrow.bottom {
+  top: calc(100% - 10px);
+  transform: translateX(-50%) rotate(-225deg);
+}
+
+.dimension-arrow.left {
+  left: 6px;
+  transform: translateX(-50%) rotate(225deg);
+}
+
+.dimension-arrow.right {
+  right: 5px;
+  transform: translateX(50%) rotate(45deg);
+}
+
+.dimension-text {
+  position: absolute;
+  left: 50%;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  color: #16365f;
+}
+
+.dimension-text.vertical {
+  top: 50%;
+  transform: translate(-80%, -50%) rotate(-90deg);
+}
+
+.dimension-text.inner {
+  top: -24px;
+}
+
+.dimension-text.outer {
+  top: -20px;
 }

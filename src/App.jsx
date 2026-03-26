@@ -3,7 +3,6 @@ import { useAtom } from "jotai";
 import {
   panelSizeAtom,
   panelCssSizeAtom,
-  panelWrapperCssWideAtom,
   sectionNumberAtom,
   sectionCssWidthAtom,
   sectionRealWidthAtom,
@@ -22,7 +21,6 @@ import "./App.css";
 function App() {
   const [panelSize, setPanelSize] = useAtom(panelSizeAtom);
   const [panelCssSize, setPanelCssSize] = useAtom(panelCssSizeAtom);
-  const [, setPanelWrapperCssWide] = useAtom(panelWrapperCssWideAtom);
   const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
   const [, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
@@ -36,12 +34,10 @@ function App() {
   useEffect(() => {
     if (!width || !height) return;
 
-    setPanelWrapperCssWide(width);
-
     const size = convertSize(panelSize, scale);
     setPanelCssSize(size);
     setScale(scale);
-  }, [width, height, panelSize, scale, setPanelCssSize, setPanelWrapperCssWide]);
+  }, [width, height, panelSize, scale, setPanelCssSize]);
 
   useEffect(() => {
     if (!panelCssSize?.width || !sectionNumber?.number) return;
@@ -77,7 +73,6 @@ function App() {
             panelWrapperCssWide={width}
           />
           <VerticalSize />
-          {/* <div className="break"></div> */}
           <HorizontalSize />
         </div>
       </div>
