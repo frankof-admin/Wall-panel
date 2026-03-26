@@ -7,5 +7,4 @@ export const outletSizeAtom = atom({ width: 200, height: 200 });
 export const outletPositionAtom = atom({ left: 200, top: 200 });
 export const sectionCssWidthAtom = atom(0);
 export const sectionRealWidthAtom = atom(0);
-// export const panelWrapperCssWideAtom = atom(0);
 export const scaleAtom = atom(1);
