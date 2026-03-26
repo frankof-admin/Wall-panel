@@ -20,7 +20,7 @@ export default function HorizontalSize() {
 
   return (
     <div
-      className="bottom-size-wrapper"
+      className="horizontal-size-wrapper"
       style={{
         left: 0,
         width: panelCssWidth,
