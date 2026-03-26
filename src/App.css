@@ -165,7 +165,7 @@ label {
 }
 
 .dimension-tick.bottom {
-  top: calc(100% - 20px);
+  top: calc(100% - 19.5px);
 }
 
 .dimension-tick.left {
@@ -187,12 +187,14 @@ label {
 }
 
 .dimension-arrow.top {
-  top: 3px;
+  top: 2px;
+  left: 0.5px;
   transform: translateX(-50%) rotate(-45deg);
 }
 
 .dimension-arrow.bottom {
-  top: calc(100% - 10px);
+  top: calc(100% - 9.5px);
+  left: 0.5px;
   transform: translateX(-50%) rotate(-225deg);
 }
 
