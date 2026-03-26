@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 const BASE_SCALE = 0.1;
+const MAX_SCALE = 40;
 
 export function useScale(panelSize, canvasSize) {
   return useMemo(() => {
@@ -19,6 +20,6 @@ export function useScale(panelSize, canvasSize) {
     const scaleX = availableWidth / rawWidth;
     const scaleY = availableHeight / rawHeight;
 
-    return Math.min(scaleX, scaleY, 1);
+    return Math.min(scaleX, scaleY, MAX_SCALE);
   }, [panelSize, canvasSize]);
 }
