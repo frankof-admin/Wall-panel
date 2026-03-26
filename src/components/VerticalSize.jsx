@@ -12,13 +12,13 @@ export default function VerticalSize() {
     <div
       className="vertical-size-wrapper"
       style={{
-        height: panelCssHeight-1
+        height: panelCssHeight - 1,
       }}
     >
       <div
         className="vertical-dimension-line"
         style={{
-          height: panelCssHeight-1
+          height: panelCssHeight - 1,
         }}
       >
         <div className="dimension-tick top" />

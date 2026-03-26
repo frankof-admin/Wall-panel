@@ -15,7 +15,8 @@ export default function HorizontalSize() {
   const sectionRealWidth = useAtomValue(sectionRealWidthAtom);
   const { number } = useAtomValue(sectionNumberAtom);
 
-  const isInnerDimensionPresent = sectionCssWidth && number > 1 ? "inner-dimension-present" : "";
+  const isInnerDimensionPresent =
+    sectionCssWidth && number > 1 ? "inner-dimension-present" : "";
   const classes = `dimension-line dimension-line-outer ${isInnerDimensionPresent}`;
 
   return (
@@ -29,7 +30,7 @@ export default function HorizontalSize() {
       {isInnerDimensionPresent && (
         <div
           className="dimension-line dimension-line-inner"
-          style={{ width: sectionCssWidth+2}}
+          style={{ width: sectionCssWidth + 2 }}
         >
           <div className="dimension-tick right" />
           <div className="dimension-arrow left" />
@@ -41,7 +42,7 @@ export default function HorizontalSize() {
       <div
         className={classes}
         style={{
-          width: panelCssWidth-1,
+          width: panelCssWidth - 1,
         }}
       >
         <div className="dimension-tick left" />
