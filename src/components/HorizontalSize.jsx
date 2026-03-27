@@ -15,29 +15,42 @@ export default function HorizontalSize() {
   const sectionRealWidth = useAtomValue(sectionRealWidthAtom);
   const { number } = useAtomValue(sectionNumberAtom);
 
-  const hasInnerLine = sectionCssWidth && number > 1 ? "has-inner-line" : "";
-  const classes = `bottom-size-wrapper ${hasInnerLine}`;
+  const isInnerDimensionPresent =
+    sectionCssWidth && number > 1 ? "inner-dimension-present" : "";
+  const classes = `dimension-line dimension-line-outer ${isInnerDimensionPresent}`;
 
   return (
-    <>
+    <div
+      className="horizontal-size-wrapper"
+      style={{
+        left: 0,
+        width: panelCssWidth,
+      }}
+    >
+      {isInnerDimensionPresent && (
+        <div
+          className="dimension-line dimension-line-inner"
+          style={{ width: sectionCssWidth + 2 }}
+        >
+          <div className="dimension-tick right" />
+          <div className="dimension-arrow left" />
+          <div className="dimension-arrow right" />
+          <div className="dimension-text inner">{sectionRealWidth}</div>
+        </div>
+      )}
+
       <div
         className={classes}
         style={{
-          width: panelCssWidth,
+          width: panelCssWidth - 1,
         }}
       >
-        {hasInnerLine && (
-          <div
-            className="horizontal-line-inner"
-            style={{ width: sectionCssWidth }}
-          >
-            <div className="horizontal-line-text">{sectionRealWidth}</div>
-          </div>
-        )}
-        <div className="horizontal-line">
-          <div className="horizontal-line-text">{panelRealWidth}</div>
-        </div>
+        <div className="dimension-tick left" />
+        <div className="dimension-tick right" />
+        <div className="dimension-arrow left" />
+        <div className="dimension-arrow right" />
+        <div className="dimension-text outer">{panelRealWidth}</div>
       </div>
-    </>
+    </div>
   );
 }

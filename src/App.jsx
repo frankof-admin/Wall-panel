@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useAtom } from "jotai";
 import {
   panelSizeAtom,
   panelCssSizeAtom,
-  panelWrapperCssWideAtom,
   sectionNumberAtom,
   sectionCssWidthAtom,
   sectionRealWidthAtom,
+  scaleAtom,
 } from "./atoms";
-import { useRef, useEffect } from "react";
 import PanelControlPanel from "./components/PanelControlPanel";
 import OutletControlPanel from "./components/OutletControlPanel";
 import Panel from "./components/Panel";
@@ -16,36 +15,42 @@ import VerticalSize from "./components/VerticalSize";
 import HorizontalSize from "./components/HorizontalSize";
 import { useDimensions } from "./useDimensions";
 import { convertSize } from "./utils";
+import { useScale } from "./useScale";
 import "./App.css";
 
 function App() {
   const [panelSize, setPanelSize] = useAtom(panelSizeAtom);
   const [panelCssSize, setPanelCssSize] = useAtom(panelCssSizeAtom);
-  const [panelWrapperCssWide, setPanelWrapperCssWide] = useAtom(
-    panelWrapperCssWideAtom,
-  );
   const [sectionNumber, setSectionNumber] = useAtom(sectionNumberAtom);
   const [sectionCssWidth, setSectionCssWidth] = useAtom(sectionCssWidthAtom);
-  const [realSectionWidth, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
+  const [, setRealSectionWidth] = useAtom(sectionRealWidthAtom);
+
   const canvasRef = useRef(null);
-  const { width: canvasCssWide } = useDimensions(canvasRef);
+  const { width, height } = useDimensions(canvasRef);
 
-  function handleSectionSizeChange() {
-    setSectionCssWidth(panelCssSize?.width / sectionNumber?.number);
-    setRealSectionWidth((panelSize?.width / sectionNumber?.number).toFixed(2));
-  }
+  const scale = useScale(panelSize, { width, height });
+  const [, setScale] = useAtom(scaleAtom);
 
   useEffect(() => {
-    if (canvasCssWide !== 0) {
-      setPanelWrapperCssWide(canvasCssWide);
-      const size = convertSize(panelSize, canvasCssWide);
-      setPanelCssSize(size);
-    }
-  }, [canvasCssWide, panelSize]);
+    if (!width || !height) return;
+
+    const size = convertSize(panelSize, scale);
+    setPanelCssSize(size);
+    setScale(scale);
+  }, [width, height, panelSize, scale, setPanelCssSize]);
 
   useEffect(() => {
-    handleSectionSizeChange();
-  }, [panelSize, panelCssSize, sectionNumber]);
+    if (!panelCssSize?.width || !sectionNumber?.number) return;
+
+    setSectionCssWidth(panelCssSize.width / sectionNumber.number);
+    setRealSectionWidth((panelSize.width / sectionNumber.number).toFixed(2));
+  }, [
+    panelCssSize?.width,
+    sectionNumber?.number,
+    panelSize?.width,
+    setSectionCssWidth,
+    setRealSectionWidth,
+  ]);
 
   return (
     <>
@@ -58,27 +63,18 @@ function App() {
         />
         <OutletControlPanel />
       </div>
+
       <div className="canvas" ref={canvasRef}>
         <div className="panel-wrapper">
           <Panel
             panelCssSize={panelCssSize}
             sectionCssWidth={sectionCssWidth}
             sectionNumber={sectionNumber?.number}
-            panelWrapperCssWide={panelWrapperCssWide}
+            panelWrapperCssWide={width}
           />
-          <VerticalSize
-            panelCssHeight={panelCssSize?.height}
-            panelHeight={panelSize?.height}
-          />
+          <VerticalSize />
+          <HorizontalSize />
         </div>
-        <div className="break"></div>
-        <HorizontalSize
-          panelCssWidth={panelCssSize?.width}
-          panelWidth={panelSize?.width}
-          sectionWidth={realSectionWidth}
-          sectionCssWidth={sectionCssWidth}
-          sectionNumber={sectionNumber?.number}
-        />
       </div>
     </>
   );

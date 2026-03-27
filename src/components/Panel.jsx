@@ -9,7 +9,15 @@ export default function Panel() {
   const { number } = useAtomValue(sectionNumberAtom);
 
   return (
-    <div className="panel" style={{ ...panelCssSize }}>
+    <div
+      className="panel"
+      style={{
+        width: panelCssSize.width,
+        height: panelCssSize.height,
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
       <Outlet />
       {Array.from({ length: number }, (_, index) => (
         <Section key={index} />
