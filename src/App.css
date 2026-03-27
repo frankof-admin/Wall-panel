@@ -218,7 +218,8 @@ label {
 
 .dimension-text.vertical {
   top: 50%;
-  transform: translate(-80%, -50%) rotate(-90deg);
+  left: -10px;
+  transform: translateX(-50%) rotate(-90deg);
 }
 
 .dimension-text.inner {
